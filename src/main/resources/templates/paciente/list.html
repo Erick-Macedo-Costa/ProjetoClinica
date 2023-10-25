@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+
+<body>
+<main class="container" >
+
+<h1>Lista de Pacientes</h1>
+<a href="/pacientes/form">Adicionar</a>
+
+<table class="table table-bordered" >
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th class="text-center" colspan="3">Açoes</th>
+    </tr>
+    <tr th:each="v : ${pacientes}">
+        <td th:text="${v.id}"> </td>
+        <td th:text="${v.nome}"> </td>
+        <td th:text="${v.telefone}"> </td>
+        <td> <a th:href="@{/consultas/listapaciente/{id}(id=${v.id})}">Consulta</a> </td>
+        <td> <a th:href="@{/pacientes/edit/{id}(id=${v.id})}">Editar</a> </td>
+        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/pacientes/remove/{id}(id=${v.id})}">Excluir</a> </td>
+    </tr>
+</table>
+    </main>
+</body>
+</html>

@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("P")
 public class Paciente extends Pessoa{
-    @NotBlank(message = "Telefone é obrigatório")
+    @NotNull(message = "Telefone é obrigatório")
     private String telefone;
     @OneToMany(mappedBy = "paciente")
     private List<Consulta> consultas;

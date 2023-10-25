@@ -5,38 +5,32 @@
 
 <body>
 
-<main>
+<main class="container">
     <form th:action="${consulta.id == null} ? @{/consultas/save} : @{/consultas/update}" th:object="${consulta}" method="post">
         <input type="hidden" th:field="*{id}">
         <div class="form-row">
             <div class="mb-2 col-lg-6">
-                <input class="form-control" type="text" th:field="*{paciente.nome}" placeholder="Paciente">
-            </div>
-            <div class="mb-2 col-lg-6">
-                <input class="form-control" type="text" th:field="*{medico.nome}" placeholder="Medico">
-            </div>
-            <div class="mb-2 col-lg-6">
-                <input class="form-control" type="text" th:field="*{observacao}" placeholder="Observaçao">
+                <input class="form-control" type="datetime-local" th:field="*{data}" placeholder="Data">
             </div>
             <div class="mb-2 col-lg-6">
                 <input class="form-control" type="text" th:field="*{valor}" placeholder="Valor">
             </div>
-
+            <div class="mb-2 col-lg-6">
+                <input class="form-control" type="text" th:field="*{observacao}" placeholder="Observaçao">
+            </div>
             <select id="pacientes"  th:field="*{paciente.id}" class="form-select">
-                <option value="">Selecione...</option>
+                <option value="">Selecione o paciente...</option>
                 <option th:each="p : ${pacientes}"
                         th:value="${p.id}"
                         th:text="${p.nome}">
                 </option>
-
             </select>
             <select id="medicos" th:field="*{medico.id}" class="form-select">
-                <option value="">Selecione...</option>
+                <option value="">Selecione o medico...</option>
                 <option th:each="m : ${medicos}"
                         th:value="${m.id}"
                         th:text="${m.nome}">
                 </option>
-
             </select>
             <div class="mb-2 col-lg-6">
                 <input type="submit" value="Enviar">

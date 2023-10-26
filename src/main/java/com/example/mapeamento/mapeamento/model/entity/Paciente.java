@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("P")
 public class Paciente extends Pessoa{
-    @NotNull(message = "Telefone é obrigatório")
+    @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
     @OneToMany(mappedBy = "paciente")
     private List<Consulta> consultas;

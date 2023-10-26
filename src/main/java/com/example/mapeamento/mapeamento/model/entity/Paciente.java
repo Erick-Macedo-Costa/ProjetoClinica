@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,6 +21,7 @@ public class Paciente extends Pessoa{
     @NotBlank(message = "Telefone é obrigatório")
     private String telefone;
     @OneToMany(mappedBy = "paciente")
+    @Valid
     private List<Consulta> consultas;
 
     public String getTelefone() {

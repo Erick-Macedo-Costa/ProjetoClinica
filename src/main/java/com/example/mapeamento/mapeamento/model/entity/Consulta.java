@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,18 +20,18 @@ public class Consulta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotNull(message = "Data é obrigatória")
+    @NotNull
     //@Future(message = "A data deve ser no futuro")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime data;
-    @NotNull(message = "Valor é obrigatório")
+    @Min(1)
     private double valor;
-    @NotNull(message = "Observação é obrigatório")
+    @NotNull
     private String observacao;
-    @NotNull(message = "Paciente é obrigatório")
+    @NotNull
     @ManyToOne
     private Paciente paciente;
-    @NotNull(message = "Médico é obrigatório")
+    @NotNull
     @ManyToOne
     private Medico medico;
 

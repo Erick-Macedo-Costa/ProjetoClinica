@@ -1,13 +1,10 @@
 package com.example.mapeamento.mapeamento.controller;
 
 import com.example.mapeamento.mapeamento.model.entity.Consulta;
-import com.example.mapeamento.mapeamento.model.entity.Medico;
-import com.example.mapeamento.mapeamento.model.entity.Paciente;
 import com.example.mapeamento.mapeamento.model.repository.ConsultaRepository;
 import com.example.mapeamento.mapeamento.model.repository.MedicoRepository;
 import com.example.mapeamento.mapeamento.model.repository.PacienteRepository;
 import jakarta.validation.Valid;
-import org.aspectj.apache.bcel.generic.ClassGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Transactional
 @Controller
@@ -40,8 +33,7 @@ public class ConsultaController {
     }
     @GetMapping("/form")
     public String form(ModelMap model, Consulta consulta){
-        model.addAttribute("pacientes", pacienteRepository.pacientes());
-        model.addAttribute("medicos", medicoRepository.medicos());
+        listas(model);
         return "/consulta/form";
     }
 
@@ -58,8 +50,7 @@ public class ConsultaController {
     @PostMapping("/save")
     public ModelAndView save(@Valid Consulta consulta, BindingResult result,ModelMap model){
         if (result.hasErrors()){
-            model.addAttribute("pacientes", pacienteRepository.pacientes());
-            model.addAttribute("medicos", medicoRepository.medicos());
+            listas(model);
             return new ModelAndView("/consulta/form");
         }
         repository.save(consulta);
@@ -75,15 +66,22 @@ public class ConsultaController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
         model.addAttribute("consulta", repository.consulta(id));
-        model.addAttribute("pacientes", pacienteRepository.pacientes());
-        model.addAttribute("medicos", medicoRepository.medicos());
+        listas(model);
         return new ModelAndView("/consulta/form", model);
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Consulta consulta) {
+    public ModelAndView update(@Valid Consulta consulta,BindingResult result, ModelMap model) {
+        if (result.hasErrors()){
+            listas(model);
+            return new ModelAndView("/consulta/form");
+        }
         repository.update(consulta);
         return new ModelAndView("redirect:/consultas/list");
+    }
+    private void listas(ModelMap model){
+        model.addAttribute("pacientes", pacienteRepository.pacientes());
+        model.addAttribute("medicos", medicoRepository.medicos());
     }
 
 }

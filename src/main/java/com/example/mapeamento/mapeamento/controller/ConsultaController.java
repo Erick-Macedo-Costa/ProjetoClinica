@@ -6,11 +6,13 @@ import com.example.mapeamento.mapeamento.model.entity.Paciente;
 import com.example.mapeamento.mapeamento.model.repository.ConsultaRepository;
 import com.example.mapeamento.mapeamento.model.repository.MedicoRepository;
 import com.example.mapeamento.mapeamento.model.repository.PacienteRepository;
+import jakarta.validation.Valid;
 import org.aspectj.apache.bcel.generic.ClassGen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,9 +56,13 @@ public class ConsultaController {
         return new ModelAndView("consulta/list");
     }
     @PostMapping("/save")
-    public ModelAndView save(Consulta consulta){
+    public ModelAndView save(@Valid Consulta consulta, BindingResult result,ModelMap model){
+        if (result.hasErrors()){
+            model.addAttribute("pacientes", pacienteRepository.pacientes());
+            model.addAttribute("medicos", medicoRepository.medicos());
+            return new ModelAndView("/consulta/form");
+        }
         repository.save(consulta);
-
         return new ModelAndView("redirect:/consultas/list");
     }
 

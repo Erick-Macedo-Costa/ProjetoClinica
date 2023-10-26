@@ -4,10 +4,12 @@ import com.example.mapeamento.mapeamento.model.entity.Medico;
 import com.example.mapeamento.mapeamento.model.entity.Paciente;
 import com.example.mapeamento.mapeamento.model.repository.MedicoRepository;
 import com.example.mapeamento.mapeamento.model.repository.PacienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +34,10 @@ public class MedicoController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Medico medico){
+    public ModelAndView save(@Valid Medico medico , BindingResult result){
+        if (result.hasErrors()){
+            return new ModelAndView("/medico/form");
+        }
         repository.save(medico);
         return new ModelAndView("redirect:/medicos/list");
     }

@@ -10,10 +10,12 @@
         <input type="hidden" th:field="*{id}">
         <div class="form-row">
             <div class="mb-2 col-lg-6">
-                <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome">
+                <input class="form-control" type="text" th:field="*{nome}" placeholder="Nome" th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></label>
             </div>
             <div class="mb-2 col-lg-6">
-                <input class="form-control" type="text" th:field="*{crm}" placeholder="CRM">
+                <input class="form-control" type="text" th:field="*{crm}" placeholder="CRM" th:errorclass="is-invalid">
+                <label class="invalid-feedback" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></label>
             </div>
             <div class="mb-2 col-lg-6">
                 <input type="submit" value="Enviar">

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{})}"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<main class="container">
+    <div>Home</div>
+    <a href="medicos/list">Consultar medicos</a>
+    <br>
+    <a href="medicos/form">Cadastrar medicos</a>
+    <br>
+    <a href="pacientes/list">Consultar pacientes</a>
+    <br>
+    <a href="pacientes/form">Cadastrar pacientes</a>
+    <br>
+    <a href="consultas/list">Consultar consultas</a>
+    <br>
+    <a href="consultas/form">Cadastrar consultas</a>
+</main>
+</body>
+</html>

@@ -2,7 +2,6 @@ package com.example.mapeamento.mapeamento.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
@@ -58,7 +57,11 @@ public class SecurityConfiguration {
                 .password(passwordEncoder().encode("admin"))
                 .roles("ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user1, admin);
+        UserDetails erick = User.withUsername("erick")
+                .password(passwordEncoder().encode("erick"))
+                .roles("ADMIN")
+                .build();
+        return new InMemoryUserDetailsManager(user1, admin,erick);
     }
 
     /**

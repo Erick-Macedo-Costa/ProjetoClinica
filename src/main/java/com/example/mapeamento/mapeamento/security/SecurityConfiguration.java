@@ -26,11 +26,8 @@ public class SecurityConfiguration {
                                         .requestMatchers("/").permitAll()
                                         .requestMatchers("/home").permitAll()
                                         .requestMatchers("/consultas/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/consultas/list").hasAnyRole("USER","ADMIN")
                                         .requestMatchers("/medicos/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/medicos/list").hasAnyRole("USER","ADMIN")
                                         .requestMatchers("/pacientes/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/pacientes/list").hasAnyRole("USER","ADMIN")
                                         //.requestMatchers(HttpMethod.POST,"/consultas/save").permitAll()
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.
@@ -38,7 +35,7 @@ public class SecurityConfiguration {
                 .formLogin(customizer ->
                         customizer
                                 .loginPage("/login") //passamos como parâmetro a URL para acesso à página de login que criamos
-                                .defaultSuccessUrl("/consultas/form", true)
+                                .defaultSuccessUrl("/", true)
                                 .permitAll() //define que essa página pode ser acessada por todos, independentemente do usuário estar autenticado ou não.
                 )
                 .httpBasic(withDefaults()) //configura a autenticação básica (usuário e senha)

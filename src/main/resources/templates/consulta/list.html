@@ -21,7 +21,7 @@
         <td th:text="${v.valor}"> </td>
         <td th:text="${v.observacao}"> </td>
         <td sec:authorize="hasAnyRole('ADMIN')" > <a th:href="@{/consultas/edit/{id}(id=${v.id})}">Editar</a> </td>
-        <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/consultas/remove/{id}(id=${v.id})}">Excluir</a> </td>
+        <td sec:authorize="hasAnyRole('ADMIN')"  > <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/consultas/remove/{id}(id=${v.id})}">Excluir</a> </td>
     </tr>
     </tr>
 

@@ -25,9 +25,10 @@ public class SecurityConfiguration {
                                 customizer
                                         .requestMatchers("/").permitAll()
                                         .requestMatchers("/home").permitAll()
-                                        .requestMatchers("/consultas/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/medicos/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/pacientes/form").hasAnyRole("ADMIN")
+                                        .requestMatchers("/consultas/form").hasAnyRole("ADMIN","MEDICO")
+                                        .requestMatchers("/consultas/list").hasAnyRole("ADMIN","MEDICO")
+                                        .requestMatchers("/medicos/form").hasAnyRole("ADMIN","MEDICO")
+                                        .requestMatchers("/pacientes/form").hasAnyRole("ADMIN","MEDICO")
                                         //.requestMatchers(HttpMethod.POST,"/consultas/save").permitAll()
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.
@@ -46,7 +47,7 @@ public class SecurityConfiguration {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user")
+        UserDetails user1 = User.withUsername("ana")
                 .password(passwordEncoder().encode("123"))
                 .roles("USER")
                 .build();
@@ -56,7 +57,7 @@ public class SecurityConfiguration {
                 .build();
         UserDetails erick = User.withUsername("erick")
                 .password(passwordEncoder().encode("erick"))
-                .roles("ADMIN")
+                .roles("MEDICO")
                 .build();
         return new InMemoryUserDetailsManager(user1, admin,erick);
     }

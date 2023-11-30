@@ -16,21 +16,21 @@
                             Relatorios
                         </a>
                         <ul class="dropdown-menu">
-                            <li sec:authorize="hasAnyRole('ADMIN','MEDICO')"  ><a class="dropdown-item" href="/pacientes/list">Pacientes</a></li>
+                            <li sec:authorize="hasAnyRole('ERICK','RECPCAO','MEDICO')"  ><a class="dropdown-item" href="/pacientes/list">Pacientes</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/medicos/list">Medicos</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li sec:authorize="hasAnyRole('ADMIN','MEDICO')"  ><a class="dropdown-item" href="/consultas/list">Consultas</a></li>
+                            <li sec:authorize="hasAnyRole('ERICK','RECPCAO','MEDICO')"  ><a class="dropdown-item" href="/consultas/list">Consultas</a></li>
                         </ul>
                     </li>
-                    <li sec:authorize="hasAnyRole('ADMIN','MEDICO')" class="nav-item dropdown">
+                    <li sec:authorize="hasAnyRole('ERICK','RECPCAO','MEDICO')" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Formularios
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/pacientes/form">Pacientes</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li sec:authorize="hasAnyRole('ADMIN')" ><a class="dropdown-item" href="/medicos/form">Medicos</a></li>
+                            <li sec:authorize="hasAnyRole('ERICK','RECPCAO','MEDICO')" ><a class="dropdown-item" href="/medicos/form">Medicos</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/consultas/form">Consultas</a></li>
                         </ul>

@@ -11,17 +11,21 @@
 <table class="table table-bordered">
     <tr>
         <th>ID</th>
+        <th>Medico</th>
+        <th>Paciente</th>
         <th>Data</th>
         <th>valor</th>
         <th colspan="3">Observação</th>
     </tr>
     <tr th:each="v : ${consultas}">
         <td th:text="${v.id}"> </td>
+        <td th:text="${v.medico.nome}"> </td>
+        <td th:text="${v.paciente.nome}"> </td>
         <td th:text="${v.data}"> </td>
         <td th:text="${v.valor}"> </td>
         <td th:text="${v.observacao}"> </td>
-        <td sec:authorize="hasAnyRole('ADMIN')" > <a th:href="@{/consultas/edit/{id}(id=${v.id})}">Editar</a> </td>
-        <td sec:authorize="hasAnyRole('ADMIN')"  > <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/consultas/remove/{id}(id=${v.id})}">Excluir</a> </td>
+        <td sec:authorize="hasAnyRole('ERICK','RECPCAO')"> <a th:href="@{/consultas/edit/{id}(id=${v.id})}">Editar</a> </td>
+        <td sec:authorize="hasAnyRole('ERICK','RECPCAO')"> <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/consultas/remove/{id}(id=${v.id})}">Excluir</a> </td>
     </tr>
     </tr>
 

@@ -9,21 +9,21 @@
 <main class="container">
 
 <h1>Lista de Medicos</h1>
-<a href="/medicos/form">Adicionar</a>
+<a sec:authorize="hasAnyRole('ERICK','ADMIN')" href="/medicos/form">Adicionar</a>
 <table class="table table-bordered">
     <tr>
         <th>ID</th>
         <th>Nome</th>
         <th>crm</th>
-        <th sec:authorize="hasAnyRole('ADMIN','MEDICO')" class="text-center" colspan="2">Açoes</th>
+        <th sec:authorize="hasAnyRole('erick')" class="text-center" colspan="2">Açoes</th>
     </tr>
     <tr th:each="v : ${medicos}">
         <td th:text="${v.id}"> </td>
         <td th:text="${v.nome}"> </td>
         <td th:text="${v.crm}"> </td>
-        <td sec:authorize="hasAnyRole('ADMIN','MEDICO')"  > <a th:href="@{/consultas/listamedico/{id}(id=${v.id})}">Consulta</a> </td>
-        <td sec:authorize="hasAnyRole('ADMIN')"  > <a th:href="@{/medicos/edit/{id}(id=${v.id})}">Editar</a> </td>
-        <td sec:authorize="hasAnyRole('ADMIN')"  > <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/medicos/remove/{id}(id=${v.id})}">Excluir</a> </td>
+        <td sec:authorize="hasAnyRole('ERICK','MEDICO')"  > <a th:href="@{/consultas/listamedico/{id}(id=${v.id})}">Consulta</a> </td>
+        <td sec:authorize="hasAnyRole('ERICK','MEDICO')"  > <a th:href="@{/medicos/edit/{id}(id=${v.id})}">Editar</a> </td>
+        <td sec:authorize="hasAnyRole('ERICK','MEDICO')"  > <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"  th:href="@{/medicos/remove/{id}(id=${v.id})}">Excluir</a> </td>
     </tr>
 </table>
     </main>
